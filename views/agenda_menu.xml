@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+
+        <!-- Acción para abrir los Comunicados -->
+        <record id="action_comunicado" model="ir.actions.act_window">
+            <field name="name">Comunicados</field>
+            <field name="res_model">agenda.comunicado</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_tree_comunicado"/>
+            <field name="search_view_id" ref="view_search_comunicado"/>
+            <field name="help" type="html">
+                <p>Gestione los comunicados aquí.</p>
+            </field>
+        </record>
+
+        <!-- Menú raíz para la Agenda -->
+        <menuitem id="menu_agenda_root" name="Agenda" sequence="10"/>
+
+        <!-- Menú para los Comunicados -->
+        <menuitem id="menu_comunicados" name="Comunicados" parent="menu_agenda_root" action="action_comunicado" sequence="1"/>
+        
+    </data>
+</odoo>

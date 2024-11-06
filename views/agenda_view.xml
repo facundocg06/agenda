@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+        <!-- Vista de Lista para los Comunicados -->
+        <record id="view_tree_comunicado" model="ir.ui.view">
+            <field name="name">tree.comunicado</field>
+            <field name="model">agenda.comunicado</field>
+            <field name="arch" type="xml">
+                <tree string="Comunicados">
+                    <field name="asunto"/>                   
+                    <field name="fecha_envio"/>
+                    
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario para los Comunicados -->
+        <record id="view_form_comunicado" model="ir.ui.view">
+            <field name="name">form.comunicado</field>
+            <field name="model">agenda.comunicado</field>
+            <field name="arch" type="xml">
+                <form string="Comunicado">
+                    <sheet>
+                        <group>
+                            <field name="asunto"/>
+                            <field name="contenido"/>
+                            <field name="tipo_comunicado_id"/>
+                            <field name="fecha_envio"/>                           
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de Búsqueda para los Comunicados -->
+        <record id="view_search_comunicado" model="ir.ui.view">
+            <field name="name">search.comunicado</field>
+            <field name="model">agenda.comunicado</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Comunicado">
+                    <field name="asunto"/>                   
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>
