@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+      <!-- Vista de lista -->
+      <record id="comunicado_tree_view" model="ir.ui.view">
+        <field name="name">comunicado.tree.view</field>
+        <field name="model">agenda.comunicado</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="asunto" />
+            <field name="contenido" />
+            <field name="fecha_envio"/> 
+            <field name="estado"/>  
+            <field name="creado_por_id"/>         
+          </tree>        
+        </field>
+      </record>
+
+      <!-- Vista de formulario -->
+      <record id="comunicado_form_view" model="ir.ui.view">
+        <field name="name">comunicado.form.view</field>
+        <field name="model">agenda.comunicado</field>
+        <field name="arch" type="xml">
+          <form>  
+            <group>
+              <field name="asunto"/>
+            </group>  
+            <group>
+              <field name="contenido"/> 
+            </group> 
+            <group>
+              <field name="fecha_envio"/>   
+            </group>                                       
+          </form>        
+        </field>
+      </record>    
+
+      <!-- Acción de la vista -->
+      <record id="comunicado_action" model="ir.actions.act_window">
+        <field name="name">Agenda</field>
+        <field name="res_model">agenda.comunicado</field>       
+        <field name="view_mode">tree,form</field>
+      </record>
+
+      <!-- Menús -->
+      <menuitem id="menu_root" name="Agenda"/>
+      <menuitem id="menu_comunicado" name="Comunicado" parent="menu_root"/> 
+      <menuitem id="menu_comunicado_list" name="Lista de Comunicados" parent="menu_comunicado" action="comunicado_action"/>
+
+     
+      
+
+    </data>
+</odoo>

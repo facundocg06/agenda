@@ -1,0 +1,18 @@
+<odoo>
+  <data>
+      <!-- Acción de la vista -->
+      <record id="comunicado_action" model="ir.actions.act_window">
+        <field name="name">Agenda</field>
+        <field name="res_model">agenda.comunicado</field>       
+        <field name="view_mode">tree,form</field>
+      </record>
+
+      <!-- Menús -->
+      <!-- Si el menú raíz no existe, define uno aquí -->
+      <menuitem id="menu_root" name="Agenda"/>
+      <menuitem id="menu_comunicado" name="Comunicado" parent="menu_root"/> 
+      <menuitem id="menu_comunicado_list" name="Lista de Comunicados" parent="menu_comunicado" action="comunicado_action"/>
+      
+
+    </data>
+</odoo>

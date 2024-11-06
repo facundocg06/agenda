@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+      <!-- Vista de lista -->
+      <record id="comunicado_tree_view" model="ir.ui.view">
+        <field name="name">comunicado.tree.view</field>
+        <field name="model">agenda.comunicado</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="asunto" />
+            <field name="contenido" />
+            <field name="fecha_envio"/>            
+          </tree>        
+        </field>
+      </record>
+
+      <!-- Vista de formulario -->
+      <record id="comunicado_form_view" model="ir.ui.view">
+        <field name="name">comunicado.form.view</field>
+        <field name="model">agenda.comunicado</field>
+        <field name="arch" type="xml">
+          <form>            
+            <field name="asunto"/>
+            <field name="contenido"/> 
+            <field name="fecha_envio"/>                        
+          </form>        
+        </field>
+      </record>      
+
+
+    </data>
+</odoo>
