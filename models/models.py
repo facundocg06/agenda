@@ -36,6 +36,7 @@ class tipo_comunicado(models.Model):
 class comunicado(models.Model):
     _name = "agenda.comunicado"
     _description = "clase comunicado"
+    
     asunto = fields.Char(string="Asunto", required=True)
     contenido = fields.Text(string="Contenido", required=True)    
     fecha_envio = fields.Datetime(string="Fecha de Envío", default=fields.Datetime.now)   
@@ -43,7 +44,11 @@ class comunicado(models.Model):
     destinatarios_ids = fields.Many2many('res.partner', string="Destinatarios", domain=[('is_parent', '=', True)])
     estudiantes_ids = fields.Many2many('agenda.estudiante', string="Estudiantes Destinatarios")
     grados_ids = fields.Many2many('agenda.grado', string="Grados Destinatarios")     
-    creado_por_id = fields.Many2one('res.users', string="Creado por", default=lambda self: self.env.user) 
+    creado_por_id = fields.Many2one('res.users', string="Creado por", default=lambda self: self.env.user)     
+    profesores_checkbox = fields.Boolean(string="Profesores")
+    padres_checkbox = fields.Boolean(string="Padres")
+    administrativos_checkbox = fields.Boolean(string="Administrativos")
+ 
     
 class parent_estudiante(models.Model):
     _name = 'agenda.parent_estudiante'

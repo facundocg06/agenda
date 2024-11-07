@@ -17,22 +17,39 @@
 
       <!-- Vista de formulario -->
       <record id="comunicado_form_view" model="ir.ui.view">
-        <field name="name">comunicado.form.view</field>
-        <field name="model">agenda.comunicado</field>
-        <field name="arch" type="xml">
-          <form>  
-            <group>
-              <field name="asunto"/>
-            </group>  
-            <group>
-              <field name="contenido"/> 
-            </group> 
-            <group>
-              <field name="fecha_envio"/>   
-            </group>                                       
-          </form>        
-        </field>
-      </record>    
+          <field name="name">comunicado.form.view</field>
+          <field name="model">agenda.comunicado</field>
+          <field name="arch" type="xml">
+            <form>  
+              <group>
+                <field name="asunto"/>
+              </group>  
+              <group>
+                <field name="contenido"/> 
+              </group> 
+              <group>
+                <field name="fecha_envio"/>   
+              </group>
+              
+              <!-- Grupo para destinatarios -->
+              <group string="Destinatarios">
+                <!-- Checkboxes para Profesores, Padres y Administrativos -->
+                <field name="destinatarios_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('is_parent', '=', True)]"/>
+                
+                <field name="profesores_checkbox" widget="boolean_toggle" string="Profesores"/>
+                
+                <field name="padres_checkbox" widget="boolean_toggle" string="Padres"/>
+                
+                <field name="administrativos_checkbox" widget="boolean_toggle" string="Administrativos"/>
+                
+                <!-- Lista desplegable de grados -->
+                <field name="grados_ids" widget="many2many_tags" options="{'no_create': True}" />
+              </group>
+              
+            </form>        
+          </field>
+      </record>
+
 
       <!-- Acción de la vista -->
       <record id="comunicado_action" model="ir.actions.act_window">
