@@ -14,6 +14,7 @@ class grado(models.Model):
     
     nombre = fields.Char(string="Nombre del Grado", required=True)
     descripcion = fields.Text(string="Descripción")
+    _rec_name = 'nombre'
 
 class estudiante(models.Model):
     _name = 'agenda.estudiante'
@@ -24,6 +25,14 @@ class estudiante(models.Model):
     padres_ids = fields.Many2many('res.partner', string="Padres", domain=[('is_parent', '=', True)])
     usuario_id = fields.Many2one('res.users', string="Usuario (Alumno)", help="Usuario asignado al estudiante para el portal")
 
+class DestinatarioTipo(models.Model):
+    _name = 'agenda.destinatario_tipo'
+    _description = 'Tipos de destinatarios para los comunicados'
+
+    nombre = fields.Char(string="Nombre", required=True)
+    descripcion = fields.Text(string="Descripción")
+
+
     
 
 class tipo_comunicado(models.Model):
@@ -33,22 +42,32 @@ class tipo_comunicado(models.Model):
     descripcion = fields.Char(string="Descripcion", required=True)
 
 
-class comunicado(models.Model):
+class DestinatarioTipo(models.Model):
+    _name = 'agenda.destinatario_tipo'
+    _description = 'Tipos de destinatarios para los comunicados'
+
+    nombre = fields.Char(string="Nombre", required=True)
+    descripcion = fields.Text(string="Descripción")
+    _rec_name = 'nombre'
+
+
+class Comunicado(models.Model):
     _name = "agenda.comunicado"
-    _description = "clase comunicado"
-    
+    _description = "Clase comunicado"
+
     asunto = fields.Char(string="Asunto", required=True)
-    contenido = fields.Text(string="Contenido", required=True)    
-    fecha_envio = fields.Datetime(string="Fecha de Envío", default=fields.Datetime.now)   
+    contenido = fields.Text(string="Contenido", required=True)
+    fecha_envio = fields.Datetime(string="Fecha de Envío", default=fields.Datetime.now)
     estado = fields.Selection([('borrador', 'Borrador'), ('enviado', 'Enviado')], default='borrador')    
-    destinatarios_ids = fields.Many2many('res.partner', string="Destinatarios", domain=[('is_parent', '=', True)])
-    estudiantes_ids = fields.Many2many('agenda.estudiante', string="Estudiantes Destinatarios")
-    grados_ids = fields.Many2many('agenda.grado', string="Grados Destinatarios")     
-    creado_por_id = fields.Many2one('res.users', string="Creado por", default=lambda self: self.env.user)     
-    profesores_checkbox = fields.Boolean(string="Profesores")
-    padres_checkbox = fields.Boolean(string="Padres")
-    administrativos_checkbox = fields.Boolean(string="Administrativos")
- 
+    grados_ids = fields.Many2many('agenda.grado', string="Grados Destinatarios")
+    creado_por_id = fields.Many2one('res.users', string="Creado por", default=lambda self: self.env.user)
+
+    destinatario_tipo = fields.Many2many(
+        'agenda.destinatario_tipo', 
+        string="Destinatarios"
+    )
+
+
     
 class parent_estudiante(models.Model):
     _name = 'agenda.parent_estudiante'

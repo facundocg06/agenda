@@ -1,0 +1,41 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Grados -->
+        <record id="1grado_secundaria" model="agenda.grado">
+            <field name="nombre">1ro Secundaria</field>
+            <field name="descripcion">1ro Secundaria</field>
+        </record>
+        
+        <record id="2grado_secundaria" model="agenda.grado">
+            <field name="nombre">2do Secundaria</field>
+            <field name="descripcion">2do Secundaria</field>
+        </record>
+        
+        <record id="3grado_secundaria" model="agenda.grado">
+            <field name="nombre">3ro Secundaria</field>
+            <field name="descripcion">3ro Secundaria</field>
+        </record>
+
+        <!-- Tipos de destinatarios -->
+        <record id="destinatario_padres" model="agenda.destinatario_tipo">
+            <field name="nombre">Padres</field>
+            <field name="descripcion">Padres de los estudiantes</field>
+        </record>
+
+        <record id="destinatario_profesores" model="agenda.destinatario_tipo">
+            <field name="nombre">Profesores</field>
+            <field name="descripcion">Profesores de los estudiantes</field>
+        </record>
+
+        <record id="destinatario_administrativos" model="agenda.destinatario_tipo">
+            <field name="nombre">Administrativos</field>
+            <field name="descripcion">Personal administrativo</field>
+        </record>
+
+        <record id="destinatario_alumnos" model="agenda.destinatario_tipo">
+            <field name="nombre">Alumnos</field>
+            <field name="descripcion">Estudiantes del sistema</field>
+        </record>
+
+    </data>
+</odoo>
