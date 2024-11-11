@@ -13,4 +13,5 @@
     ],
     'installable': True,
     'application': True,
+    'post_init_hook': 'create_profesor',
 }
