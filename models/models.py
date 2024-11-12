@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from pyfcm import FCMNotification
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -25,15 +26,7 @@ class estudiante(models.Model):
     padres_ids = fields.Many2many('res.partner', string="Padres", domain=[('is_parent', '=', True)])
     usuario_id = fields.Many2one('res.users', string="Usuario (Alumno)", help="Usuario asignado al estudiante para el portal")
 
-class DestinatarioTipo(models.Model):
-    _name = 'agenda.destinatario_tipo'
-    _description = 'Tipos de destinatarios para los comunicados'
-
-    nombre = fields.Char(string="Nombre", required=True)
-    descripcion = fields.Text(string="Descripción")
-
-
-    
+   
 
 class tipo_comunicado(models.Model):
     _name = 'agenda.tipo_comunicado'
@@ -57,15 +50,25 @@ class Comunicado(models.Model):
 
     asunto = fields.Char(string="Asunto", required=True)
     contenido = fields.Text(string="Contenido", required=True)
+    multimedia_ids = fields.Many2many(
+        'ir.attachment',
+        string='Archivos',
+        help='Cargar imágenes, videos, audios o enlaces.'
+    )
     fecha_envio = fields.Datetime(string="Fecha de Envío", default=fields.Datetime.now)
     estado = fields.Selection([('borrador', 'Borrador'), ('enviado', 'Enviado')], default='borrador')    
     grados_ids = fields.Many2many('agenda.grado', string="Grados Destinatarios")
     creado_por_id = fields.Many2one('res.users', string="Creado por", default=lambda self: self.env.user)
+    destinatario_tipo = fields.Many2many('agenda.destinatario_tipo', string="Destinatarios")
 
-    destinatario_tipo = fields.Many2many(
-        'agenda.destinatario_tipo', 
-        string="Destinatarios"
-    )
+    @api.model
+    def default_get(self, fields):
+        res = super(Comunicado, self).default_get(fields)
+        user = self.env.user
+        res['grados_ids'] = user.grados_ids.ids
+        return res
+
+
 
 
     
@@ -76,6 +79,80 @@ class parent_estudiante(models.Model):
     padre_id = fields.Many2one('res.partner', string="Padre", required=True)
     estudiante_id = fields.Many2one('agenda.estudiante', string="Estudiante", required=True)
     grado_id = fields.Many2one('agenda.grado', string="Grado del Estudiante")
+
+class ResUsers(models.Model):
+    _inherit = 'res.users'
+
+    es_profesor = fields.Boolean(string="Es Profesor", default=False)
+    es_administrativo = fields.Boolean(string="Es Administrativo", default=False)
+    device_token = fields.Char(string="Token del Dispositivo")
+    grados_ids = fields.Many2many(
+    'agenda.grado', 
+    string="Grados Asignados", 
+    help="Grados asignados al profesor o administrativo"
+    )
+
+
+    @api.depends('es_administrativo', 'es_profesor')
+    def _compute_grados_ids(self):
+        """Asignar grados automáticamente según el rol"""
+        for user in self:
+            if user.es_administrativo:
+                # Si es administrativo, asignar todos los grados
+                user.grados_ids = self.env['agenda.grado'].search([])
+            elif user.es_profesor:
+                # Los grados deben ser seleccionados manualmente para profesores
+                pass
+            else:
+                user.grados_ids = [(5, 0, 0)]  # Limpiar grados si no es profesor ni administrativo
+
+class Notificacion(models.Model):
+    _name = 'agenda.notificacion'
+    _description = 'Registro de Notificaciones'
+
+    comunicado_id = fields.Many2one('agenda.comunicado', string="Comunicado", required=True)
+    user_id = fields.Many2one('res.users', string="Usuario", required=True)
+    estado = fields.Selection([
+        ('enviado', 'Enviado'),
+        ('recibido', 'Recibido'),
+        ('no_enviado', 'No Enviado'),
+        ('leido', 'Leído')
+    ], default='no_enviado', string="Estado")
+    fecha_envio = fields.Datetime(string="Fecha de Envío", default=fields.Datetime.now)
+
+    @api.model
+    def send_notification(self, user, comunicado):
+        # Configurar FCM
+        fcm_api_key = 'AIzaSyBqfDV0zA7R70ja8ZJER3XUQQFCMjJmkKE'
+        push_service = FCMNotification(api_key=fcm_api_key)
+
+        # Obtener el token del dispositivo del usuario
+        device_token = user.device_token
+        if not device_token:
+            return False
+
+        # Mensaje de la notificación
+        message_title = f"Nuevo Comunicado: {comunicado.asunto}"
+        message_body = comunicado.contenido
+
+        try:
+            result = push_service.notify_single_device(
+                registration_id=device_token,
+                message_title=message_title,
+                message_body=message_body
+            )
+            estado = 'enviado' if result.get('success') == 1 else 'no_enviado'
+        except Exception as e:
+            estado = 'no_enviado'
+
+        # Registrar la notificación
+        self.create({
+            'comunicado_id': comunicado.id,
+            'user_id': user.id,
+            'estado': estado,
+        })
+        return True
+
     
     
 

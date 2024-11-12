@@ -27,6 +27,9 @@
                     <group>
                         <field name="contenido"/>
                     </group>
+                    <group string="Archivos">
+                        <field name="multimedia_ids" widget="many2many_binary" options="{'file': 'file'}"/>
+                    </group>
                     <group>
                         <field name="fecha_envio"/>
                     </group>
@@ -34,14 +37,25 @@
                     <!-- Grupo para destinatarios -->
                     <group string="Destinatarios">                        
                         <field name="destinatario_tipo" widget="many2many_tags" options="{'no_create': True}"/>
+                        <!-- Aplicar dominio dinámico basado en el usuario actual -->
                         <field name="grados_ids" widget="many2many_tags" options="{'no_create': True}"/>
+
                     </group>
                 </form>
             </field>
         </record>
-
-
-
+        <record id="view_notification_log_tree" model="ir.ui.view">
+            <field name="name">notificacion.tree</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="comunicado_id"/>
+                    <field name="user_id"/>
+                    <field name="estado"/>
+                    <field name="fecha_envio"/>
+                </tree>
+            </field>
+        </record>
 
 
         <!-- Acción de la vista -->
