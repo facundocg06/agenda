@@ -44,6 +44,8 @@ class DestinatarioTipo(models.Model):
     _rec_name = 'nombre'
 
 
+from odoo import models, fields, api
+
 class Comunicado(models.Model):
     _name = "agenda.comunicado"
     _description = "Clase comunicado"
@@ -65,9 +67,14 @@ class Comunicado(models.Model):
     def default_get(self, fields):
         res = super(Comunicado, self).default_get(fields)
         user = self.env.user
+<<<<<<< HEAD
         res['grados_ids'] = user.grados_ids.ids
         return res
 
+=======
+        res['uid_grados_ids'] = user.grados_ids.ids
+        return res
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
 
 
 
@@ -85,6 +92,7 @@ class ResUsers(models.Model):
 
     es_profesor = fields.Boolean(string="Es Profesor", default=False)
     es_administrativo = fields.Boolean(string="Es Administrativo", default=False)
+<<<<<<< HEAD
     device_token = fields.Char(string="Token del Dispositivo")
     grados_ids = fields.Many2many(
     'agenda.grado', 
@@ -93,6 +101,16 @@ class ResUsers(models.Model):
     )
 
 
+=======
+    grados_ids = fields.Many2many(
+        'agenda.grado', 
+        string="Grados Asignados", 
+        help="Grados asignados al profesor",
+        compute='_compute_grados_ids', 
+        store=True
+    )
+
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
     @api.depends('es_administrativo', 'es_profesor')
     def _compute_grados_ids(self):
         """Asignar grados automáticamente según el rol"""
@@ -106,6 +124,7 @@ class ResUsers(models.Model):
             else:
                 user.grados_ids = [(5, 0, 0)]  # Limpiar grados si no es profesor ni administrativo
 
+<<<<<<< HEAD
 class Notificacion(models.Model):
     _name = 'agenda.notificacion'
     _description = 'Registro de Notificaciones'
@@ -153,6 +172,8 @@ class Notificacion(models.Model):
         })
         return True
 
+=======
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
     
     
 

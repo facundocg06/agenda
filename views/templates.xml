@@ -44,6 +44,7 @@
                 </form>
             </field>
         </record>
+<<<<<<< HEAD
         <record id="view_notification_log_tree" model="ir.ui.view">
             <field name="name">notificacion.tree</field>
             <field name="model">agenda.notificacion</field>
@@ -57,6 +58,8 @@
             </field>
         </record>
 
+=======
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
 
         <!-- Acción de la vista -->
         <record id="comunicado_action" model="ir.actions.act_window">

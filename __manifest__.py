@@ -15,5 +15,9 @@
     
     'installable': True,
     'application': True,
+<<<<<<< HEAD
     
+=======
+    'post_init_hook': 'create_profesor',
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
 }
