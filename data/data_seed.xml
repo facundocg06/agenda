@@ -15,6 +15,18 @@
             <field name="nombre">3ro Secundaria</field>
             <field name="descripcion">3ro Secundaria</field>
         </record>
+        <record id="4grado_secundaria" model="agenda.grado">
+            <field name="nombre">4to Secundaria</field>
+            <field name="descripcion">4to Secundaria</field>
+        </record>
+        <record id="5grado_secundaria" model="agenda.grado">
+            <field name="nombre">5to Secundaria</field>
+            <field name="descripcion">5to Secundaria</field>
+        </record>
+        <record id="6grado_secundaria" model="agenda.grado">
+            <field name="nombre">6to Secundaria</field>
+            <field name="descripcion">6to Secundaria</field>
+        </record>
 
         <!-- Tipos de destinatarios -->
         <record id="destinatario_padres" model="agenda.destinatario_tipo">
