@@ -44,7 +44,21 @@
                 </form>
             </field>
         </record>
+<<<<<<< HEAD
+        <record id="view_notification_log_tree" model="ir.ui.view">
+            <field name="name">notificacion.tree</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="comunicado_id"/>
+                    <field name="user_id"/>
+                    <field name="estado"/>
+                    <field name="fecha_envio"/>
+                </tree>
+            </field>
+        </record>
 
+<<<<<<< HEAD
         <!-- Vista de lista de notificaciones recibidas -->
         <record id="view_notificacion_recibidas_tree" model="ir.ui.view">
             <field name="name">notificacion.recibidas.tree</field>
@@ -94,6 +108,10 @@
  
 
 
+=======
+=======
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
+>>>>>>> 378dedb5270908c731b1b8c1767827670dbdf092
 
         <!-- Acción de la vista -->
         <record id="comunicado_action" model="ir.actions.act_window">

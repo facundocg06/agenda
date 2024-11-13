@@ -40,6 +40,7 @@ class DestinatarioTipo(models.Model):
     _rec_name = 'nombre'
 
 
+<<<<<<< HEAD
     
 class parent_estudiante(models.Model):
     _name = 'agenda.parent_estudiante'
@@ -74,6 +75,9 @@ class ResUsers(models.Model):
             else:
                 user.grados_ids = [(5, 0, 0)]  
 
+=======
+from odoo import models, fields, api
+>>>>>>> 378dedb5270908c731b1b8c1767827670dbdf092
 
 class Comunicado(models.Model):
     _name = "agenda.comunicado"
@@ -90,6 +94,7 @@ class Comunicado(models.Model):
     grados_ids = fields.Many2many('agenda.grado', string="Grados Destinatarios")
     creado_por_id = fields.Many2one('res.users', string="Creado por", default=lambda self: self.env.user)
     destinatario_tipo = fields.Many2many('agenda.destinatario_tipo', string="Destinatarios")
+<<<<<<< HEAD
 
     @api.model
     def create(self, vals):
@@ -114,6 +119,71 @@ class Comunicado(models.Model):
 
 
 
+=======
+
+    @api.model
+    def default_get(self, fields):
+        res = super(Comunicado, self).default_get(fields)
+        user = self.env.user
+<<<<<<< HEAD
+        res['grados_ids'] = user.grados_ids.ids
+        return res
+
+=======
+        res['uid_grados_ids'] = user.grados_ids.ids
+        return res
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
+
+
+
+    
+class parent_estudiante(models.Model):
+    _name = 'agenda.parent_estudiante'
+    _description = 'Relación entre padres y estudiantes'
+    
+    padre_id = fields.Many2one('res.partner', string="Padre", required=True)
+    estudiante_id = fields.Many2one('agenda.estudiante', string="Estudiante", required=True)
+    grado_id = fields.Many2one('agenda.grado', string="Grado del Estudiante")
+
+class ResUsers(models.Model):
+    _inherit = 'res.users'
+
+    es_profesor = fields.Boolean(string="Es Profesor", default=False)
+    es_administrativo = fields.Boolean(string="Es Administrativo", default=False)
+<<<<<<< HEAD
+    device_token = fields.Char(string="Token del Dispositivo")
+    grados_ids = fields.Many2many(
+    'agenda.grado', 
+    string="Grados Asignados", 
+    help="Grados asignados al profesor o administrativo"
+    )
+
+
+=======
+    grados_ids = fields.Many2many(
+        'agenda.grado', 
+        string="Grados Asignados", 
+        help="Grados asignados al profesor",
+        compute='_compute_grados_ids', 
+        store=True
+    )
+
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
+    @api.depends('es_administrativo', 'es_profesor')
+    def _compute_grados_ids(self):
+        """Asignar grados automáticamente según el rol"""
+        for user in self:
+            if user.es_administrativo:
+                # Si es administrativo, asignar todos los grados
+                user.grados_ids = self.env['agenda.grado'].search([])
+            elif user.es_profesor:
+                # Los grados deben ser seleccionados manualmente para profesores
+                pass
+            else:
+                user.grados_ids = [(5, 0, 0)]  # Limpiar grados si no es profesor ni administrativo
+
+<<<<<<< HEAD
+>>>>>>> 378dedb5270908c731b1b8c1767827670dbdf092
 class Notificacion(models.Model):
     _name = 'agenda.notificacion'
     _description = 'Registro de Notificaciones'
@@ -125,7 +195,11 @@ class Notificacion(models.Model):
         ('recibido', 'Recibido'),
         ('no_enviado', 'No Enviado'),
         ('leido', 'Leído')
+<<<<<<< HEAD
     ], default='enviado', string="Estado")
+=======
+    ], default='no_enviado', string="Estado")
+>>>>>>> 378dedb5270908c731b1b8c1767827670dbdf092
     fecha_envio = fields.Datetime(string="Fecha de Envío", default=fields.Datetime.now)
 
     @api.model
@@ -161,6 +235,11 @@ class Notificacion(models.Model):
         })
         return True
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 03bee8c32dc4c30436ce5d3d5e4d48209881775c
+>>>>>>> 378dedb5270908c731b1b8c1767827670dbdf092
     
     
 
