@@ -27,6 +27,9 @@
                     <group>
                         <field name="contenido"/>
                     </group>
+                    <group string="Archivos">
+                        <field name="multimedia_ids" widget="many2many_binary" options="{'file': 'file'}"/>
+                    </group>
                     <group>
                         <field name="fecha_envio"/>
                     </group>
@@ -34,13 +37,61 @@
                     <!-- Grupo para destinatarios -->
                     <group string="Destinatarios">                        
                         <field name="destinatario_tipo" widget="many2many_tags" options="{'no_create': True}"/>
+                        <!-- Aplicar dominio dinámico basado en el usuario actual -->
                         <field name="grados_ids" widget="many2many_tags" options="{'no_create': True}"/>
+
                     </group>
                 </form>
             </field>
         </record>
 
+        <!-- Vista de lista de notificaciones recibidas -->
+        <record id="view_notificacion_recibidas_tree" model="ir.ui.view">
+            <field name="name">notificacion.recibidas.tree</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="comunicado_id"/>
+                    <field name="estado"/>
+                    <field name="fecha_envio"/>
+                </tree>
+            </field>
+        </record>
 
+        <!-- Acción para notificaciones recibidas -->
+        <record id="action_notificaciones_recibidas" model="ir.actions.act_window">
+            <field name="name">Notificaciones Recibidas</field>
+            <field name="res_model">agenda.notificacion</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('user_id', '=', uid)]</field>
+        </record>
+
+        <!-- Menú para notificaciones recibidas -->
+        <menuitem id="menu_notificaciones" name="Notificaciones" parent="menu_root"/>
+        <menuitem id="menu_notificaciones_recibidas" name="Notificaciones Recibidas" parent="menu_notificaciones" action="action_notificaciones_recibidas"/>
+
+        <!-- Vista de lista de usuarios que recibieron el comunicado -->
+        <record id="view_notificacion_usuarios_tree" model="ir.ui.view">
+            <field name="name">notificacion.usuarios.tree</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="comunicado_id"/>
+                    <field name="user_id"/>
+                    <field name="estado"/>
+                    <field name="fecha_envio"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción para ver usuarios a los que se envió un comunicado -->
+        <record id="action_notificaciones_usuarios" model="ir.actions.act_window">
+            <field name="name">Usuarios Notificados</field>
+            <field name="res_model">agenda.notificacion</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('comunicado_id', '=', context.get('default_comunicado_id'))]</field>
+        </record>
+ 
 
 
 
@@ -55,5 +106,52 @@
         <menuitem id="menu_root" name="Agenda"/>
         <menuitem id="menu_comunicado" name="Comunicado" parent="menu_root"/> 
         <menuitem id="menu_comunicado_list" name="Lista de Comunicados" parent="menu_comunicado" action="comunicado_action"/>
+ 
+        <!-- Vista de lista de comunicados en el menú de Notificaciones -->
+        <record id="view_comunicado_notificaciones_tree" model="ir.ui.view">
+            <field name="name">comunicado.notificaciones.tree.view</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="comunicado_id"/>
+                    <field name="estado"/>
+                    <field name="fecha_envio"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de lista de notificaciones para un comunicado específico -->
+        <record id="view_notificaciones_por_comunicado_tree" model="ir.ui.view">
+            <field name="name">notificaciones.por.comunicado.tree.view</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="user_id"/>
+                    <field name="fecha_envio"/>
+                    <field name="estado"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción de la vista para listar las notificaciones por comunicado -->
+        <record id="action_notificaciones_por_comunicado" model="ir.actions.act_window">
+            <field name="name">Notificaciones por Comunicado</field>
+            <field name="res_model">agenda.notificacion</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'search_default_comunicado_id': active_id}</field>
+            <field name="domain">[('comunicado_id', '=', context.get('active_id'))]</field>
+        </record>
+
+        <!-- Acción de la vista de comunicados desde Notificaciones -->
+        <record id="action_comunicado_notificaciones_list" model="ir.actions.act_window">
+            <field name="name">Notificaciones Enviadas</field>
+            <field name="res_model">agenda.comunicado</field>
+            <field name="view_mode">tree</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- Menús -->
+        <menuitem id="menu_notificaciones" name="Notificaciones" parent="menu_root"/>
+        <menuitem id="menu_comunicado_notificaciones" name="Notificaiones Enviadas" parent="menu_notificaciones" action="action_comunicado_notificaciones_list"/>
     </data>
 </odoo>

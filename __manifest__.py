@@ -4,13 +4,20 @@
     'summary': 'Gestión de agenda estudiantil para enviar comunicados',
     'category': 'Education',
     'author': 'grupo 33',
-    'depends': ['base'],
-    'data': [        
+    'depends': ['base','web'],
+    'data': [ 
+        'data/data_seed.xml',       
         'security/ir.model.access.csv',        
         'views/views.xml',
         'views/templates.xml',
-        'data/data_seed.xml',
+        
     ],
+    
     'installable': True,
     'application': True,
+    'external_dependencies': {
+    'python': ['pyfcm'],
+    },
+
+    
 }
