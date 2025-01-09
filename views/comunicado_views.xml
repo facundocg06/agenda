@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record id="view_comunicado_form" model="ir.ui.view">
+            <field name="name">school.comunicado.form</field>
+            <field name="model">school.comunicado</field>
+            <field name="arch" type="xml">
+                <form string="Comunicado">
+                    <sheet>
+                        <group>
+                            <field name="asunto"/>
+                            <field name="contenido"/>
+                            <field name="fecha_envio"/>
+                            <field name="destinatarios_tipo"/>
+                        </group>
+                        <group>
+                            <field name="estudiantes_ids"/>
+                            <field name="curso_id"/>
+                            <field name="paralelo"/>
+                        </group>
+                        <field name="archivos_ids"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_comunicado_tree" model="ir.ui.view">
+            <field name="name">school.comunicado.tree</field>
+            <field name="model">school.comunicado</field>
+            <field name="arch" type="xml">
+                <tree string="Comunicados">
+                    <field name="asunto"/>
+                    <field name="fecha_envio"/>
+                    <field name="destinatarios_tipo"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

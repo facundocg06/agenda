@@ -1,0 +1,69 @@
+<odoo>
+    <data>
+        <!-- Menú principal -->
+        <menuitem id="agenda.menu_root" name="Agenda"/>
+
+        <!-- Menú de Comunicado -->
+        <menuitem id="agenda.menu_comunicado" name="Comunicado" parent="agenda.menu_root"/>
+
+        <!-- Menú de Actividad -->
+        <menuitem id="agenda.menu_actividad" name="Actividad" parent="agenda.menu_root"/>
+
+        <menuitem id="agenda.menu_estudiantes" name="Estudiantes" parent="agenda.menu_root"/>
+
+           <!-- Menú para Profesores -->
+        <menuitem id="agenda.menu_profesor" name="Profesores" parent="agenda.menu_root"/>
+
+        <menuitem id="agenda.menu_tutor" name="Tutores" parent="agenda.menu_root"/>
+
+                <!-- Acción para abrir la vista de tutores -->
+        <record id="action_tutor" model="ir.actions.act_window">
+            <field name="name">Tutores</field>
+            <field name="res_model">school.tutor</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menú para acceder a los tutores -->
+        <menuitem id="agenda.menu_tutor_action" name="Tutores" parent="agenda.menu_tutor" action="action_tutor"/>
+
+            <!-- Acción para la vista de Profesores -->
+        <record id="action_profesor" model="ir.actions.act_window">
+            <field name="name">Profesores</field>
+            <field name="res_model">school.profesor</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Vínculo del menú con la acción -->
+        <menuitem id="agenda.menu_profesor_action" name="Profesores" parent="agenda.menu_profesor" action="action_profesor"/>
+
+        <record id="estudiantes_action" model="ir.actions.act_window">
+            <field name="name">Estudiantes</field>
+            <field name="res_model">school.estudiante</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="agenda.menu_estudiantes_action" name="Estudiantes" parent="agenda.menu_estudiantes" action="estudiantes_action"/>
+
+        <!-- Acción para la vista de Comunicados -->
+        <record id="comunicado_action" model="ir.actions.act_window">
+            <field name="name">Comunicados</field>
+            <field name="res_model">school.comunicado</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Asociando la acción al menú de comunicado -->
+        <menuitem id="agenda.menu_comunicado_action" name="Comunicados" parent="agenda.menu_comunicado" action="comunicado_action"/>
+
+        <!-- Acción para la vista de Actividades -->
+        <record id="actividad_action" model="ir.actions.act_window">
+            <field name="name">Actividades</field>
+            <field name="res_model">school.actividad</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Asociando la acción al menú de actividad -->
+        <menuitem id="agenda.menu_actividad_action" name="Actividades" parent="agenda.menu_actividad" action="actividad_action"/>
+
+
+    </data>
+</odoo>

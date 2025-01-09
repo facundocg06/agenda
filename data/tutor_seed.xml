@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Tutores -->
+        <record id="tutor_luis_martinez" model="school.tutor">
+            <field name="name">Luis Martínez</field>
+            <field name="estudiantes_ids" eval="[(4, ref('estudiante_maria_perez')), (4, ref('estudiante_pedro_gonzalez'))]"/>
+        </record>
+        <record id="tutor_susana_rodriguez" model="school.tutor">
+            <field name="name">Susana Rodríguez</field>
+            <field name="estudiantes_ids" eval="[(4, ref('estudiante_clara_morales')), (4, ref('estudiante_juan_lopez'))]"/>
+        </record>
+        <record id="tutor_ana_fernandez" model="school.tutor">
+            <field name="name">Ana Fernández</field>
+            <field name="estudiantes_ids" eval="[(4, ref('estudiante_andres_martinez')), (4, ref('estudiante_susana_garcia'))]"/>
+        </record>
+        <record id="tutor_pedro_garcia" model="school.tutor">
+            <field name="name">Pedro García</field>
+            <field name="estudiantes_ids" eval="[(4, ref('estudiante_luis_fernandez')), (4, ref('estudiante_carolina_rojas'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+
+        <!-- Regla de acceso para Profesores -->
+        <record id="comunicado_access_rule_profesores" model="ir.rule">
+            <field name="name">Comunicados para Profesores</field>
+            <field name="model_id" ref="model_school_comunicado"/>
+            <field name="groups" eval="[(4, ref('agenda.group_admin'))]"/>
+            <field name="domain_force">[('destinatarios_tipo', '=', 'todos')]</field>
+        </record>
+
+        <!-- Regla de acceso para Estudiantes Específicos -->
+        <record id="comunicado_access_rule_estudiantes" model="ir.rule">
+            <field name="name">Comunicados para Estudiantes Específicos</field>
+            <field name="model_id" ref="model_school_comunicado"/>
+            <field name="groups" eval="[(4, ref('agenda.group_student'))]"/>
+            <field name="domain_force">[('estudiantes_ids', 'in', user.partner_id.ids)]</field>
+        </record>
+
+        <!-- Regla de acceso para Estudiantes por Curso y Paralelo -->
+        <record id="comunicado_access_rule_grupo" model="ir.rule">
+            <field name="name">Comunicados para Curso y Paralelo</field>
+            <field name="model_id" ref="model_school_comunicado"/>
+            <field name="groups" eval="[(4, ref('agenda.group_student'))]"/>
+            <field name="domain_force">[('curso_id', '=', user.partner_id.estudiante_id.curso_id.id),
+                                        ('paralelo', '=', user.partner_id.estudiante_id.paralelo_id.name)]</field>
+        </record>
+
+        <record id="rule_ir_attachment_public" model="ir.rule">
+            <field name="name">Access Public Attachments</field>
+            <field name="model_id" ref="base.model_ir_attachment"/>
+            <field name="domain_force">[('public', '=', True)]</field>
+            <field name="groups" eval="[(4, ref('base.group_public'))]"/>
+        </record>
+
+    </data>
+</odoo>
+
+

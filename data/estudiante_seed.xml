@@ -1,0 +1,47 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Estudiantes para Primaria -->
+        <record id="estudiante_maria_perez" model="school.estudiante">
+            <field name="name">María Pérez</field>
+            <field name="curso_id" ref="curso_primaria_1"/>
+            <field name="paralelo_id" ref="paralelo_1_primaria_A"/>
+        </record>
+        <record id="estudiante_pedro_gonzalez" model="school.estudiante">
+            <field name="name">Pedro González</field>
+            <field name="curso_id" ref="curso_primaria_2"/>
+            <field name="paralelo_id" ref="paralelo_1_primaria_B"/>
+        </record>
+        <record id="estudiante_clara_morales" model="school.estudiante">
+            <field name="name">Clara Morales Perez</field>
+            <field name="curso_id" ref="curso_primaria_3"/>
+            <field name="paralelo_id" ref="paralelo_1_primaria_A"/>
+        </record>
+        <record id="estudiante_juan_lopez" model="school.estudiante">
+            <field name="name">Juan López</field>
+            <field name="curso_id" ref="curso_primaria_4"/>
+            <field name="paralelo_id" ref="paralelo_1_primaria_B"/>
+        </record>
+
+        <!-- Estudiantes para Secundaria -->
+        <record id="estudiante_andres_martinez" model="school.estudiante">
+            <field name="name">Andrés Martínez</field>
+            <field name="curso_id" ref="curso_secundaria_1"/>
+            <field name="paralelo_id" ref="paralelo_1_primaria_A"/>
+        </record>
+        <record id="estudiante_susana_garcia" model="school.estudiante">
+            <field name="name">Susana García</field>
+            <field name="curso_id" ref="curso_secundaria_2"/>
+            <field name="paralelo_id" ref="paralelo_1_primaria_B"/>
+        </record>
+        <record id="estudiante_luis_fernandez" model="school.estudiante">
+            <field name="name">Luis Fernández</field>
+            <field name="curso_id" ref="curso_secundaria_3"/>
+            <field name="paralelo_id" ref="paralelo_1_primaria_A"/>
+        </record>
+        <record id="estudiante_carolina_rojas" model="school.estudiante">
+            <field name="name">Carolina Rojas</field>
+            <field name="curso_id" ref="curso_secundaria_4"/>
+            <field name="paralelo_id" ref="paralelo_1_primaria_B"/>
+        </record>
+    </data>
+</odoo>

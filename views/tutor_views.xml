@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <!-- Vista de árbol para Tutor -->
+        <record id="view_tutor_tree" model="ir.ui.view">
+            <field name="name">school.tutor.tree</field>
+            <field name="model">school.tutor</field>
+            <field name="arch" type="xml">
+                <tree string="Tutores">
+                    <field name="name" string="Nombre Completo"/>
+                    <field name="estudiantes_ids" string="Estudiantes a Cargo" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de formulario para Tutor -->
+        <record id="view_tutor_form" model="ir.ui.view">
+            <field name="name">school.tutor.form</field>
+            <field name="model">school.tutor</field>
+            <field name="arch" type="xml">
+                <form string="Tutor">
+                    <sheet>
+                        <group>
+                            <field name="name" string="Nombre Completo"/>
+                            <field name="estudiantes_ids" string="Estudiantes a Cargo" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

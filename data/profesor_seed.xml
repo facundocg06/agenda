@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Profesores -->
+        <record id="profesor_juan_perez" model="school.profesor">
+            <field name="name">Juan Pérez</field>
+            <field name="cursos_ids" eval="[(4, ref('curso_primaria_1')), (4, ref('curso_primaria_2'))]"/>
+        </record>
+        <record id="profesor_maria_gonzalez" model="school.profesor">
+            <field name="name">María González</field>
+            <field name="cursos_ids" eval="[(4, ref('curso_primaria_3')), (4, ref('curso_secundaria_1'))]"/>
+        </record>
+        <record id="profesor_andres_lopez" model="school.profesor">
+            <field name="name">Andrés López</field>
+            <field name="cursos_ids" eval="[(4, ref('curso_secundaria_2')), (4, ref('curso_secundaria_3'))]"/>
+        </record>
+        <record id="profesor_clara_morales" model="school.profesor">
+            <field name="name">Clara Morales</field>
+            <field name="cursos_ids" eval="[(4, ref('curso_secundaria_4')), (4, ref('curso_secundaria_5'))]"/>
+        </record>
+    </data>
+</odoo>

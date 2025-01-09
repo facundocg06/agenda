@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_agenda_comunicado,agenda.comunicado,model_agenda_comunicado,base.group_user,1,1,1,1
+access_comunicado_user,access_comunicado_user,model_agenda_comunicado,base.group_user,1,1,1,1
+access_grado_user,access_grado_user,model_agenda_grado,base.group_user,1,1,1,1
+access_estudiante_user,access_estudiante_user,model_agenda_estudiante,base.group_user,1,1,1,1
+access_tipo_comunicado_user,access_tipo_comunicado_user,model_agenda_tipo_comunicado,base.group_user,1,1,1,1
+access_res_partner_user,access_res_partner_user,model_res_partner,base.group_user,1,1,1,1
+access_destinatario_tipo_user,access_destinatario_tipo_user,model_agenda_destinatario_tipo,base.group_user,1,1,1,0
+access_destinatario_tipo_manager,access_destinatario_tipo_manager,model_agenda_destinatario_tipo,base.group_system,1,1,1,1
+access_res_partner,res.partner,model_res_partner,base.group_user,1,0,0,0
+access_comunicado,agenda.comunicado,model_agenda_comunicado,base.group_user,1,1,1,1
+access_notificacion,agenda.notificacion,model_agenda_notificacion,base.group_user,1,1,1,1

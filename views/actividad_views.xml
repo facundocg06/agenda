@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record id="view_actividad_form" model="ir.ui.view">
+            <field name="name">school.actividad.form</field>
+            <field name="model">school.actividad</field>
+            <field name="arch" type="xml">
+                <form string="Actividad">
+                    <sheet>
+                        <group>
+                            <field name="titulo"/>
+                            <field name="descripcion"/>
+                            <field name="fecha_entrega"/>
+                            <field name="destinatarios_tipo"/>
+                        </group>
+                        <group>
+                            <field name="estudiantes_ids"/>
+                            <field name="curso_id"/>
+                            <field name="paralelo"/>
+                        </group>
+                        <field name="recursos_ids"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_actividad_tree" model="ir.ui.view">
+            <field name="name">school.actividad.tree</field>
+            <field name="model">school.actividad</field>
+            <field name="arch" type="xml">
+                <tree string="Actividades">
+                    <field name="titulo"/>
+                    <field name="fecha_entrega"/>
+                    <field name="destinatarios_tipo"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

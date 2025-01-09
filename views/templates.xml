@@ -76,8 +76,8 @@
         </record>
 
         <!-- Menús para notificaciones -->
-        <menuitem id="menu_notificaciones_recibidas" name="Notificaciones Recibidas" parent="menu_notificaciones" action="action_notificaciones_recibidas"/>
-        <menuitem id="menu_notificaciones_enviadas" name="Comunicados Enviados" parent="menu_notificaciones" action="action_notificaciones_enviadas"/>
+        <!-- <menuitem id="menu_notificaciones_recibidas" name="Notificaciones Recibidas" parent="menu_notificaciones" action="action_notificaciones_recibidas"/>
+        <menuitem id="menu_notificaciones_enviadas" name="Comunicados Enviados" parent="menu_notificaciones" action="action_notificaciones_enviadas"/> -->
 
         <!-- Vista de usuarios notificados por comunicado -->
         <record id="view_notificacion_usuarios_tree" model="ir.ui.view">
@@ -92,7 +92,7 @@
             </field>
         </record>
         <!-- Vista de lista de usuarios -->
-       
+
         <record id="view_res_users_tree" model="ir.ui.view">
             <field name="name">res.users.tree</field>
             <field name="model">res.users</field>
@@ -131,7 +131,7 @@
                     </group>
                 </form>
             </field>
-        </record>        
+        </record>
 
         <!-- Acción para usuarios notificados de un comunicado -->
         <record id="action_notificaciones_usuarios" model="ir.actions.act_window">
@@ -149,13 +149,13 @@
         </record>
 
         <!-- Menú para lista de comunicados -->
-        <menuitem id="menu_comunicado_list" name="Lista de Comunicados" parent="menu_comunicado" action="comunicado_action"/>
 
         <menuitem id="menu_root" name="Agenda"/>
         <menuitem id="menu_comunicado" name="Comunicado" parent="menu_root"/>
-        <menuitem id="menu_notificaciones" name="Notificaciones" parent="menu_root"/>         
+        <menuitem id="menu_comunicado_list" name="Lista de Comunicados" parent="menu_comunicado" action="comunicado_action"/>
+        <menuitem id="menu_notificaciones" name="Notificaciones" parent="menu_root"/>
         <menuitem id="menu_res_users" name="Usuarios" parent="menu_root"/>
-        
+
         <!-- Acción para la vista de árbol de usuarios -->
         <record id="action_res_users" model="ir.actions.act_window">
             <field name="name">Usuarios</field>
@@ -163,7 +163,7 @@
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_res_users_tree"/>
         </record>
-        
+
         <!-- Menú que referencia la acción -->
         <menuitem id="menu_res_users_list" name="Lista de Usuarios" parent="menu_res_users" action="action_res_users"/>
 
